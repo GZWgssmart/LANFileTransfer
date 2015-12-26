@@ -91,15 +91,15 @@ public class TransferUtil {
     }
 
     public static void saveIP(String allIp) throws IOException {
-        mkConfigDir();
+        mkDir(Constants.IP_DIR);
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(Constants.IP_DIR + "/" + Constants.IP_FILE))));
         writer.write(allIp);
         writer.flush();
         writer.close();
     }
 
-    private static void mkConfigDir() {
-        File file = new File(Constants.IP_DIR);
+    public static void mkDir(String dir) {
+        File file = new File(dir);
         if (!file.exists()) {
             file.mkdir();
         }

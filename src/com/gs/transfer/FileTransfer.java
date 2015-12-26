@@ -35,7 +35,7 @@ public class FileTransfer extends JFrame {
         setTitle(Constants.FRAME_TITLE);
         getContentPane().setLayout(new BorderLayout());
         initWidgets();
-        mkDir();
+        TransferUtil.mkDir(Constants.DIR);
         FileTransferServer server = new FileTransferServer();
         server.init();
         client = new FileTransferClient();
@@ -95,13 +95,6 @@ public class FileTransfer extends JFrame {
         tableModel = new IPTableModel();
         tableModel.setDatas(TransferUtil.getAllIP());
         tableModel.setColumns(TransferUtil.getColumns());
-    }
-
-    private void mkDir() {
-        File file = new File(Constants.DIR);
-        if(!file.exists()) {
-            file.mkdir();
-        }
     }
 
     public static void main(String... args) {

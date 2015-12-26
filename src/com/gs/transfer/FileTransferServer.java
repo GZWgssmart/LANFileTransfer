@@ -23,7 +23,7 @@ public class FileTransferServer {
                     Socket socket = serverSocket.accept();
                     DataInputStream dis = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
                     String name = dis.readUTF();
-                    DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(Constants.DIR_MAC + name)));
+                    DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(Constants.DIR + name)));
                     byte[] buf = new byte[1024];
                     int length;
                     while ((length = dis.read(buf)) != -1) {
