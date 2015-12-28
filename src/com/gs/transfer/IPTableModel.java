@@ -12,6 +12,7 @@ public class IPTableModel extends DefaultTableModel {
         super(datas, columns);
     }
 
+    @SuppressWarnings("unchecked")
     public Vector<Vector<Object>> getDatas() {
         return getDataVector();
     }

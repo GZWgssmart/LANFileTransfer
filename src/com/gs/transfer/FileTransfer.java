@@ -15,8 +15,6 @@ public class FileTransfer extends JFrame {
     private JTextField ipTxt;
     private JTable ipTable;
 
-    private IPTableModel tableModel;
-
     public FileTransferClient getClient() {
         return client;
     }
