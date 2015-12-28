@@ -16,7 +16,7 @@ public class Constants {
 
     public static final String FRAME_TITLE = "局域网文件传输";
     public static final String LABEL_IP = "IP地址段";
-    public static final String BUTTON_GET_IP = "搜索电脑";
+    public static final String BUTTON_GET_IP = "搜索IP";
     public static final String BUTTON_GET_IP_NAME = "searchIP";
     public static final String BUTTON_FILE = "选择文件";
     public static final String BUTTON_FILE_NAME = "fileChooser";

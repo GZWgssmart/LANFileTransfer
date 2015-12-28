@@ -42,13 +42,8 @@ public class TransferListener implements ActionListener {
     }
 
     private void searchIP() {
-        Vector<Vector<Object>> allIPs = TransferUtil.getAllIP(transfer.getIpTxt().getText());
         JTable ipTable = transfer.getIpTable();
-        IPTableModel model = (IPTableModel) ipTable.getModel();
-        model.getDatas().clear();
-        model.setDatas(allIPs);
-        ipTable.setModel(model);
-        ipTable.repaint();
+        TransferUtil.getAllIP(transfer.getIpTxt().getText(), ipTable);
     }
 
     private void showFileChooser() {

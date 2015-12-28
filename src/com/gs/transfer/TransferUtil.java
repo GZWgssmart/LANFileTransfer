@@ -1,5 +1,6 @@
 package com.gs.transfer;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.util.Vector;
@@ -9,55 +10,41 @@ import java.util.Vector;
  */
 public class TransferUtil {
 
-    public static boolean ping(String ip){
+    public static boolean ping(String ip) {
         try {
             InetAddress address = InetAddress.getByName(ip);
-            return address.isReachable(1000);
+            return address.isReachable(3000);
         } catch (IOException e) {
             return false;
         }
     }
 
-    public static Vector<Vector<Object>> getAllIP(String section) {
-        Vector<Vector<Object>> allIP = new Vector<>();
-        new Thread(new Runnable() {
+    public static void getIP(String ip, IPTableModel model) {
+        Thread ipSearchThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                if (section.startsWith(Constants.DEFAULT_IP_START)) {
-                    for (int i = 1; i < 255; i++) {
-                        String ip = section + "." + i;
-                        if (ping(ip)) {
-                            Vector<Object> ips = new Vector<>();
-                            ips.add(ip);
-                            ips.add(Boolean.FALSE);
-                            allIP.add(ips);
-                        }
-                    }
+                if (ping(ip)) {
+                    Vector<Object> ips = new Vector<>();
+                    ips.add(ip);
+                    ips.add(Boolean.FALSE);
+                    model.addRow(ips);
                 }
             }
-        }).start();
-        return allIP;
+        });
+        ipSearchThread.setPriority(Thread.MAX_PRIORITY);
+        ipSearchThread.start();
     }
 
-    public static Vector<Vector<Object>> getAllIP1(String section) {
-        Vector<Vector<Object>> allIP = new Vector<>();
+    public static void getAllIP(String section, JTable ipTable) {
         if (section.startsWith(Constants.DEFAULT_IP_START)) {
+            IPTableModel model = (IPTableModel) ipTable.getModel();
+            model.getDataVector().clear();
+            ipTable.setModel(model);
+            ipTable.repaint();
             for (int i = 1; i < 255; i++) {
-                String ip = section + "." + i;
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (ping(ip)) {
-                            Vector<Object> ips = new Vector<>();
-                            ips.add(ip);
-                            ips.add(Boolean.FALSE);
-                            allIP.add(ips);
-                        }
-                    }
-                }).start();
+                getIP(section + "." + i, model);
             }
         }
-        return allIP;
     }
 
     public static Vector<Vector<Object>> getAllIP() {
@@ -106,8 +93,8 @@ public class TransferUtil {
     }
 
     public static boolean checkFileType(String fileName) {
-        for(String type : Constants.FILE_TYPES) {
-            return fileName.endsWith(type);
+        for (String type : Constants.FILE_TYPES) {
+            return fileName.toLowerCase().endsWith(type);
         }
         return false;
     }

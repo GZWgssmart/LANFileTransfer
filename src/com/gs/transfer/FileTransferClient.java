@@ -35,7 +35,7 @@ public class FileTransferClient {
                 InetAddress address = InetAddress.getByName(ip);
                 // Socket socket = new Socket(address, Constants.PORT);
                 Socket socket = new Socket();
-                socket.connect(new InetSocketAddress(address, Constants.PORT), 3000);
+                socket.connect(new InetSocketAddress(address, Constants.PORT), 5000);
                 DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
                 DataOutputStream dos  = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
                 dos.writeUTF(file.getName());

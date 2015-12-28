@@ -2,7 +2,6 @@ package com.gs.transfer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 
 
@@ -32,6 +31,7 @@ public class FileTransfer extends JFrame {
 
     public FileTransfer() throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, IOException {
         setSize(480, 500);
+        setLocation(200, 100);
         setTitle(Constants.FRAME_TITLE);
         getContentPane().setLayout(new BorderLayout());
         initWidgets();
@@ -68,9 +68,10 @@ public class FileTransfer extends JFrame {
         topPanel.add(fileBtn);
         topPanel.add(transferBtn);
         add(topPanel, BorderLayout.NORTH);
-        initTableModel();
+        IPTableModel tableModel = new IPTableModel(TransferUtil.getAllIP(), TransferUtil.getColumns());
         ipTable = new JTable(tableModel);
         ipTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        ipTable.setSelectionBackground(Color.GRAY);
         JScrollPane scroll = new JScrollPane(ipTable);
         // scroll.setSize(480, 400);
         centerPanel.add(scroll, BorderLayout.CENTER);
@@ -89,12 +90,6 @@ public class FileTransfer extends JFrame {
         bottomPanelRight.add(saveBtn);
         bottomPanel.add(bottomPanelRight, BorderLayout.EAST);
         add(bottomPanel, BorderLayout.SOUTH);
-    }
-
-    private void initTableModel() {
-        tableModel = new IPTableModel();
-        tableModel.setDatas(TransferUtil.getAllIP());
-        tableModel.setColumns(TransferUtil.getColumns());
     }
 
     public static void main(String... args) {
