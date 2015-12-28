@@ -61,6 +61,7 @@ public class TransferUtil {
                         ip.add(Boolean.FALSE);
                         allIP.add(ip);
                     }
+                    reader.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
