@@ -95,7 +95,7 @@ public class TransferUtil {
 
     public static boolean checkFileType(String fileName) {
         for (String type : Constants.FILE_TYPES) {
-            return fileName.toLowerCase().endsWith(type);
+            return fileName.toLowerCase().endsWith(type.toLowerCase());
         }
         return false;
     }
