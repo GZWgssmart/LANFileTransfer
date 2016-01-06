@@ -29,7 +29,7 @@ public class FileTransfer extends JFrame {
 
     public FileTransfer() throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException, IOException {
         setSize(480, 500);
-        setLocation(200, 100);
+        setLocationRelativeTo(null);
         setTitle(Constants.FRAME_TITLE);
         getContentPane().setLayout(new BorderLayout());
         initWidgets();
